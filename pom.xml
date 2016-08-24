@@ -66,7 +66,7 @@
 			<artifactId>ojdbc7</artifactId>
 			<version>12.1.0.2.0</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -92,7 +92,7 @@
 			<version>1.16</version>
 		</dependency>
 
-
+		<!-- JSON 관련 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
