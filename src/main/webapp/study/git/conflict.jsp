@@ -6,6 +6,10 @@
 <meta charset="UTF-8">
 <title>conflict.jsp</title>
    
+   <p>
+   	Conflict 잘된다.
+   </p>
+   
    <!-- Bootstrap 3.3.4 -->
    <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
    
