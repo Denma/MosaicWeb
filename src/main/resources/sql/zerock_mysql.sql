@@ -12,6 +12,7 @@ DROP TABLE tbl_board;
 --
 -- tbl_member
 --
+
 CREATE TABLE tbl_member
 (
    userid       VARCHAR(50) NOT NULL,
