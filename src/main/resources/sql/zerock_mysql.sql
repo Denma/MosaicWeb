@@ -1,6 +1,7 @@
 --
 -- DROP table
 --
+DROP TABLE tbl_message;
 DROP TABLE tbl_member;
 DROP TABLE tbl_user;
 
@@ -49,6 +50,24 @@ INSERT INTO tbl_user(UID, upw, uname)
 INSERT INTO tbl_user(UID, upw, uname)
      VALUES ('user03', 'user03', 'Thor');
 
+--
+-- tbl_message
+--
+CREATE TABLE tbl_message (
+	mid int NOT NULL AUTO_INCREMENT,
+	targetid varchar(50) NOT NULL,
+	sender varchar(50) NOT NULL,
+	message text NOT NULL,
+	opendate timestamp,
+	senddate timestamp NOT NULL DEFAULT now(),
+	PRIMARY KEY(mid)
+);
+
+ALTER TABLE tbl_message ADD CONSTRAINT fk_usertarget
+FOREIGN KEY (targetid) REFERENCES tbl_user (uid);
+
+ALTER TABLE tbl_message ADD CONSTRAINT fk_usersender
+FOREIGN KEY (sender) REFERENCES tbl_user (uid);
 
 --
 -- tbl_board

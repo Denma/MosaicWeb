@@ -14,7 +14,7 @@
 
 </head>
 <body>
-<!-- 	<div class="container-fluid"> -->
+<!-- <div class="container-fluid"> -->
 		<div class="row">
 			<div class="col-xs-6 bbox">
 				<img alt="One" src="http://www.placehold.it/100x100?text=One">

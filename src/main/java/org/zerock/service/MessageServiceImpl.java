@@ -26,6 +26,7 @@ public class MessageServiceImpl implements MessageService {
     pointDAO.updatePoint(vo.getSender(), 10);
   }
 
+  //@Transactional
   @Override
   public MessageVO readMessage(String uid, Integer mid) throws Exception {
 
