@@ -55,7 +55,7 @@
 <!-- 		조회 폼 관련 부분  -->
 	<div class="row">
 		<!-- left column -->
-		<div class="col-md-6">
+		<div class="col-md-12">
 			<!-- general form elements -->
 			<div class="box box-primary">
 				<div class="box-header">
@@ -116,9 +116,9 @@
 			<!-- /.box -->
 		</div>
 		<!--/.col (left) -->
-		<div class="col-md-6">
-			<img class="img-circle" style="width: 100%" alt="xxx" src="http://www.loremflickr.com/200/200/dog"/>
-		</div>
+<!-- 		<div class="col-md-6"> -->
+<!-- 			<img class="img-circle" style="width: 100%" alt="xxx" src="http://www.loremflickr.com/200/200/dog"/> -->
+<!-- 		</div> -->
 
 	</div>
 	<!-- /.row 댓글관련 부분-->

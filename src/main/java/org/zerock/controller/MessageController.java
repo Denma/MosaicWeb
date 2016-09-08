@@ -2,6 +2,8 @@ package org.zerock.controller;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,22 +16,25 @@ import org.zerock.service.MessageService;
 @RestController
 @RequestMapping("/messages")
 public class MessageController {
+//	readMessage 로직 생성할것(GET방식)
+	
+	static Logger logger = LoggerFactory.getLogger(MessageController.class);
+	
+	@Inject
+	private MessageService service;
 
-  @Inject
-  private MessageService service;
+	@RequestMapping(value = "/", method = RequestMethod.POST)
+	public ResponseEntity<String> addMessage(@RequestBody MessageVO vo) {
 
-  @RequestMapping(value = "/", method = RequestMethod.POST)
-  public ResponseEntity<String> addMessage(@RequestBody MessageVO vo) {
-
-    ResponseEntity<String> entity = null;
-    try {
-      service.addMessage(vo);
-      entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
-    } catch (Exception e) {
-      e.printStackTrace();
-      entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-    }
-    return entity;
-  }
+		ResponseEntity<String> entity = null;
+		try {
+			service.addMessage(vo);
+			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
 
 }

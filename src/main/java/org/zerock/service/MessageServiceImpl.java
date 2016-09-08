@@ -11,29 +11,30 @@ import org.zerock.persistence.PointDAO;
 @Service
 public class MessageServiceImpl implements MessageService {
 
-  @Inject
-  private MessageDAO messageDAO;
+	@Inject
+	private MessageDAO messageDAO;
 
-  @Inject
-  private PointDAO pointDAO;
+	@Inject
+	private PointDAO pointDAO;
 
+//	Transaction처리로 어디선가 오류나면 All or Nothing(완벽히 수행 or 아무것도 수행안됨)처리됨
+	@Transactional
+	@Override
+	public void addMessage(MessageVO vo) throws Exception {
 
-  //@Transactional
-  @Override
-  public void addMessage(MessageVO vo) throws Exception {
+		messageDAO.create(vo);
+		pointDAO.updatePoint(vo.getSender(), 10);
+	}
 
-    messageDAO.create(vo);
-    pointDAO.updatePoint(vo.getSender(), 10);
-  }
+//	Transaction처리로 어디선가 오류나면 All or Nothing(완벽히 수행 or 아무것도 수행안됨)처리됨
+	 @Transactional
+	@Override
+	public MessageVO readMessage(String uid, Integer mid) throws Exception {
 
-  //@Transactional
-  @Override
-  public MessageVO readMessage(String uid, Integer mid) throws Exception {
+		messageDAO.updateState(mid);
 
-    messageDAO.updateState(mid);
+		pointDAO.updatePoint(uid, 5);
 
-    pointDAO.updatePoint(uid, 5);
-
-    return messageDAO.readMessage(mid);
-  }
+		return messageDAO.readMessage(mid);
+	}
 }
