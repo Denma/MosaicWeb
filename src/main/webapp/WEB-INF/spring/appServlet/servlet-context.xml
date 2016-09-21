@@ -58,6 +58,11 @@
 			<mapping path="/sboard/register" />
 			<mapping path="/sboard/modifyPage" />
 			<mapping path="/sboard/removePage" />
+			
+			<mapping path="/gboard/register" />
+			<mapping path="/gboard/modifyPage" />
+			<mapping path="/gboard/removePage" />
+			
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
 
