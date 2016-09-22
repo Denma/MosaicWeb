@@ -322,7 +322,7 @@
 		if ($(".timeline li").size() > 1) {
 			return;
 		}
-		getPage("/replies/" + bno + "/1");
+		getPage("/greplies/all" + bno + "/1");
 
 	});
 
@@ -334,7 +334,7 @@
 
 		replyPage = $(this).attr("href");
 
-		getPage("/replies/" + bno + "/" + replyPage);
+		getPage("/greplies/" + bno + "/" + replyPage);
 
 	});
 
@@ -349,7 +349,7 @@
 
 		$.ajax({
 			type : 'post',
-			url : '/replies/',
+			url : '/greplies/',
 			headers : {
 				"Content-Type" : "application/json",
 				"X-HTTP-Method-Override" : "POST"
@@ -365,7 +365,7 @@
 				if (result == 'SUCCESS') {
 					alert("등록 되었습니다.");
 					replyPage = 1;
-					getPage("/replies/" + bno + "/" + replyPage);
+					getPage("/greplies/" + bno + "/" + replyPage);
 					replyerObj.val("");
 					replytextObj.val("");
 				}
@@ -391,7 +391,7 @@
 
 		$.ajax({
 			type : 'put',
-			url : '/replies/' + rno,
+			url : '/greplies/' + rno,
 			headers : {
 				"Content-Type" : "application/json",
 				"X-HTTP-Method-Override" : "PUT"
@@ -404,7 +404,7 @@
 				console.log("result: " + result);
 				if (result == 'SUCCESS') {
 					alert("수정 되었습니다.");
-					getPage("/replies/" + bno + "/" + replyPage);
+					getPage("/greplies/" + bno + "/" + replyPage);
 				}
 			}
 		});
