@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="org.zerock.mapper.gboardMapper">
 
 	<insert id="create">
-		insert into tbl_gboard (title, content, writer)
+		insert into tbl_board_game (title, content, writer)
 		values(#{title},#{content}, #{writer})
 	</insert>
 
@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select
 		bno, title, content, writer, regdate, viewcnt , replycnt
 		from
-		tbl_gboard
+		tbl_board_game
 		where bno = #{bno}
 	</select>
 
@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  select 
    bno, title, content, writer, regdate, viewcnt 
  from 
-   tbl_gboard 
+   tbl_board_game 
  where bno > 0 
  order by bno desc, regdate desc
  ]]>
@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  select 
    bno, title, content, writer, regdate, viewcnt , replycnt
  from 
-   tbl_gboard 
+   tbl_board_game 
  where bno > 0 
  order by bno desc, regdate desc
  limit #{page}, 10
@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  select 
    bno, title, content, writer, regdate, viewcnt , replycnt
  from 
-   tbl_gboard 
+   tbl_board_game 
  where bno > 0 
  order by bno desc, regdate desc
  limit #{pageStart}, #{perPageNum}
@@ -55,12 +55,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<update id="update">
-		update tbl_gboard set title =#{title}, content =#{content}
+		update tbl_board_game set title =#{title}, content =#{content}
 		where bno = #{bno}
 	</update>
 
 	<delete id="delete">
-		delete from tbl_gboard where bno = #{bno}
+		delete from tbl_board_game where bno = #{bno}
 	</delete>
 
 
@@ -70,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  select 
    count(bno) 
  from 
-   tbl_gboard 
+   tbl_board_game 
  where 
    bno > 0 
  ]]>
@@ -110,7 +110,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listSearch" resultType="org.zerock.domain.GboardVO">
 <![CDATA[  
   select * 
-  from tbl_gboard 
+  from tbl_board_game 
   where bno > 0 
 ]]>
 
@@ -125,7 +125,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listSearchCount" resultType="int">
 <![CDATA[  
   select count(bno) 
-  from tbl_gboard 
+  from tbl_board_game 
   where bno > 0 
 ]]>
 		<include refid="search"></include>
@@ -135,32 +135,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
  
 <update id="updateReplyCnt">
-  update tbl_gboard set replycnt = replycnt + #{amount} where bno = #{bno}
+  update tbl_board_game set replycnt = replycnt + #{amount} where bno = #{bno}
 </update>
 
 
 <update id="updateViewCnt">
-  update tbl_gboard set viewcnt = viewcnt +1 where bno = #{bno}
+  update tbl_board_game set viewcnt = viewcnt +1 where bno = #{bno}
 </update>
 
 
  
 <insert id="addAttach">
-insert into tbl_gattach(fullname, bno) values (#{fullName}, LAST_INSERT_ID())
+insert into tbl_attach_game(fullname, bno) values (#{fullName}, LAST_INSERT_ID())
 </insert> 
 
 
 <select id="getAttach" resultType="string">
-select fullname from tbl_gattach where bno = #{bno} order by regdate
+select fullname from tbl_attach_game where bno = #{bno} order by regdate
 </select> 
 
  
 <delete id="deleteAttach">
-delete from tbl_gattach where bno = #{bno}
+delete from tbl_attach_game where bno = #{bno}
 </delete>
 
 <insert id="replaceAttach">
-insert into tbl_gattach(fullname, bno) values (#{fullName}, #{bno})
+insert into tbl_attach_game(fullname, bno) values (#{fullName}, #{bno})
 </insert>
   
  
