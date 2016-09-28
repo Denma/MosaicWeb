@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 import org.zerock.domain.UserVO;
 import org.zerock.dto.LoginDTO;
@@ -67,8 +68,8 @@ public class UserController {
   }
 
   @RequestMapping(value = "/logout", method = RequestMethod.GET)
-  public void logout(HttpServletRequest request, 
-      HttpServletResponse response, HttpSession session) throws Exception {
+  public String logout(HttpServletRequest request, 
+      HttpServletResponse response, HttpSession session, RedirectAttributes rttr) throws Exception {
 
     Object obj = session.getAttribute("login");
 
@@ -86,7 +87,9 @@ public class UserController {
         response.addCookie(loginCookie);
         service.keepLogin(vo.getUid(), session.getId(), new Date());
       }
+      
     }
+    return "redirect:/gboard/list";
   }
 
 }

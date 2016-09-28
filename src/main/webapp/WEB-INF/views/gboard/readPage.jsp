@@ -5,16 +5,18 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <html>
-<!-- Bootstrap 3.3.4 -->
-<link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
-<link
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css" />
 <head>
 <title>readPage.jsp</title>
+	<!-- Bootstrap 3.3.4 -->
+	<link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+	<link
+		href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+		rel="stylesheet" type="text/css" />
+	<!-- 	javascript 댓글관련 ↓  -->
 	<script type="text/javascript" src="/resources/js/upload.js"></script>
-<!-- 	javascript 댓글관련 ↓  -->
+	
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	<!-- Main content -->	
@@ -77,19 +79,19 @@
 
 				<div class="box-body">
 					<div class="form-group">
-						<label for="exampleInputEmail1">Title</label>
+						<label for="exampleInputEmail1">제목</label>
 						 
 						<input type="text"
 								name='title' class="form-control" value="${gboardVO.title}"
 								readonly="readonly">
 					</div>
 					<div class="form-group">
-						<label for="exampleInputPassword1">Content</label>
+						<label for="exampleInputPassword1">내용</label>
 						<textarea class="form-control" name="content" rows="3"
-							readonly="readonly">${gboardVO.content}</textarea>
+						 autofocus="autofocus" readonly="readonly">${gboardVO.content}</textarea>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputEmail1">Writer</label>
+						<label for="exampleInputEmail1">작성자</label>
 						
 						<input type="text"
 								name="writer" class="form-control" value="${gboardVO.writer}"
@@ -107,11 +109,10 @@
 					<ul class="mailbox-attachments clearfix uploadedList">
 					</ul>
 					<c:if test="${login.uid == gboardVO.writer}">
-						<button type="submit" class="btn btn-warning" id="modifyBtn">Modify</button>
-						<button type="submit" class="btn btn-danger" id="removeBtn">REMOVE</button>
+						<button type="submit" class="btn btn-warning" id="modifyBtn">수정</button>
+						<button type="submit" class="btn btn-danger" id="removeBtn">삭제</button>
 					</c:if>
-					<button type="submit" class="btn btn-primary" id="goListBtn">GO
-						LIST</button>
+					<button type="submit" class="btn btn-primary" id="goListBtn">목록으로</button>
 				</div>
 
 			</div>
@@ -131,29 +132,27 @@
 
 			<div class="box box-success">
 				<div class="box-header">
-					<h3 class="box-title">ADD NEW REPLY</h3>
+					<h3 class="box-title">댓글 추가하기</h3>
 				</div>
 
 				<!-- 로그인 상태 -->
 				<c:if test="${not empty login}">
 					<div class="box-body">
-						<label for="exampleInputEmail1">Writer</label>
+						<label for="exampleInputEmail1">작성자</label>
 						
 						<input
-							class="form-control" type="text" placeholder="USER ID"
+							class="form-control" type="text"
 							id="newReplyWriter" value="${login.uid }" readonly="readonly">
 							
-						<label for="exampleInputEmail1">Reply Text</label>
+						<label for="exampleInputEmail1">댓글내용</label>
 						
 						<input
-							class="form-control" type="text" placeholder="REPLY TEXT"
-							id="newReplyText">
+							class="form-control" type="text" id="newReplyText">
 							
 					</div>
 
 					<div class="box-footer">
-						<button type="submit" class="btn btn-primary" id="replyAddBtn">ADD
-							REPLY</button>
+						<button type="submit" class="btn btn-primary" id="replyAddBtn">댓글 추가하기</button>
 					</div>
 				</c:if>
 				
@@ -161,7 +160,7 @@
 				<c:if test="${empty login}">
 					<div class="box-body">
 						<div>
-							<a href="javascript:goLogin();">Login Please</a>
+							<a href="/user/login">로그인 후 이용하세요</a>
 						</div>
 					</div>
 				</c:if>
@@ -173,7 +172,7 @@
 			<ul class="timeline">
 				<!-- timeline time label -->
 				<li class="time-label" id="repliesDiv"><span class="bg-green">
-						Replies List <small id='replycntSmall'> [
+						댓글 목록 <small id='replycntSmall'> [
 							${gboardVO.replycnt} ] </small>
 				</span></li>
 			</ul>
@@ -204,9 +203,9 @@
 					</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
-					<button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-info" id="replyModBtn">수정</button>
+					<button type="button" class="btn btn-danger" id="replyDelBtn">삭제</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 				</div>
 			</div>
 		</div>
@@ -229,7 +228,7 @@
 <script id="template" type="text/x-handlebars-template">
 	{{#each .}}
 	     <li class="replyLi" data-rno={{rno}}>
-            <i class="fa fa-forward bg-blue"></i>
+            <i class="fa fa-forwa0rd bg-blue"></i>
             <div class="timeline-item" >
              <span class="time">
                 <i class="fa fa-clock-o"></i>{{prettifyDate regdate}}
@@ -249,7 +248,6 @@
 <script>
 
 // 	댓글은 자바 스크립트로 진행  ↓
-
 	Handlebars.registerHelper("eqReplyer", function(replyer, block) {
 		var accum = '';
 		if (replyer == '${login.uid}') {
@@ -322,7 +320,7 @@
 		if ($(".timeline li").size() > 1) {
 			return;
 		}
-		getPage("/greplies/all" + bno + "/1");
+		getPage("/greplies/" + bno + "/1");
 
 	});
 

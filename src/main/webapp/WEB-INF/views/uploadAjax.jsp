@@ -40,7 +40,7 @@ small {
 			var files = event.originalEvent.dataTransfer.files;
 			
 			var file = files[0];
-
+			
 			//console.log(file);
 			
 			var formData = new FormData();
